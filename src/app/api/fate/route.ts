@@ -1,5 +1,5 @@
 import { NextRequest } from "next/server";
-import OpenAI from "openai";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
 // ── Wikipedia helpers ─────────────────────────────────────────────────────────
 
@@ -78,15 +78,15 @@ export async function POST(request: NextRequest) {
     const context = historicalEvents.join("\n\n");
 
     // 2. Call the LLM
-    const apiKey = process.env.OPENAI_API_KEY;
+    const apiKey = process.env.GEMINI_API_KEY;
     if (!apiKey) {
       return Response.json(
-        { error: "OpenAI API key is not configured. Add OPENAI_API_KEY to .env.local." },
+        { error: "Gemini API key is not configured. Add GEMINI_API_KEY to .env.local." },
         { status: 500 }
       );
     }
 
-    const client = new OpenAI({ apiKey });
+    const genAI = new GoogleGenerativeAI(apiKey);
 
     const systemPrompt = `You are "The Chronicler of Doom" — a darkly comedic, historically knowledgeable narrator who specialises in telling modern people exactly how they would perish in historical eras. Your tone is morbid, sarcastic, darkly funny, and dramatically theatrical. You have encyclopaedic knowledge of historical diseases, warfare, social conditions, and occupational hazards. You never sugarcoat death. You revel in grim details. You speak directly to the person ("you would..."). Think Blackadder meets a plague doctor.`;
 
@@ -104,17 +104,17 @@ After the story, on a new line output EXACTLY this JSON block (no markdown, no e
 
 The survivalProbability should be a realistic (usually very low) percentage chance they survive more than one year. Be creative and cruel with the cause of death string.`;
 
-    const completion = await client.chat.completions.create({
-      model: "gpt-4o-mini",
-      messages: [
-        { role: "system", content: systemPrompt },
-        { role: "user", content: userPrompt },
-      ],
-      max_tokens: 1200,
-      temperature: 0.9,
+    const model = genAI.getGenerativeModel({
+      model: "gemini-1.5-flash",
+      systemInstruction: systemPrompt
     });
 
-    const rawText = completion.choices[0]?.message?.content ?? "";
+    const completion = await model.generateContent({
+      contents: [{ role: "user", parts: [{ text: userPrompt }] }],
+      generationConfig: { maxOutputTokens: 1200, temperature: 0.9 }
+    });
+
+    const rawText = completion.response.text();
 
     // Parse out the JSON block from the end
     const jsonMatch = rawText.match(/\{[\s\S]*"survivalProbability"[\s\S]*\}/);

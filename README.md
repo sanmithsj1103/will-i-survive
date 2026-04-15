@@ -5,7 +5,7 @@
 ![Next.js](https://img.shields.io/badge/Next.js-16-black?style=flat-square&logo=next.js)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?style=flat-square&logo=typescript)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind-4-38bdf8?style=flat-square&logo=tailwindcss)
-![OpenAI](https://img.shields.io/badge/OpenAI-GPT--4o--mini-green?style=flat-square&logo=openai)
+![Gemini](https://img.shields.io/badge/Gemini-1.5_Flash-blue?style=flat-square&logo=google)
 
 ---
 
@@ -14,7 +14,7 @@
 - 🕰️ Enter any **historical year** (3000 BC – 2024)
 - 💼 Enter your **modern profession**
 - 📜 Fetches **real historical context** from the Wikipedia API
-- 🤖 Passes events + profession to **GPT-4o-mini** for a morbid, sarcastic fate story
+- 🤖 Passes events + profession to **Gemini 1.5 Flash** for a morbid, sarcastic fate story
 - 📊 Returns a **Survival Probability %** + **life expectancy in days** + **cause of death**
 - 🎭 Dark, dramatic UI with animations, glowing skulls, and a survival meter
 
@@ -43,13 +43,13 @@ Create a `.env.local` file in the root directory:
 cp .env.example .env.local
 ```
 
-Then open `.env.local` and add your OpenAI API key:
+Then open `.env.local` and add your Gemini API key:
 
 ```env
-OPENAI_API_KEY=sk-...your-key-here
+GEMINI_API_KEY=AIzaSy...your-key-here
 ```
 
-Get a key at → https://platform.openai.com/api-keys
+Get a key at → https://aistudio.google.com/app/apikey
 
 ### 4. Run the development server
 
@@ -70,7 +70,7 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 | Styling | Tailwind CSS v4 + custom CSS |
 | Fonts | Cinzel, Crimson Text, Inter (Google Fonts) |
 | Historical Data | Wikipedia REST API |
-| AI Story Generation | OpenAI GPT-4o-mini |
+| AI Story Generation | Google Gemini 1.5 Flash |
 
 ---
 
@@ -92,7 +92,7 @@ src/
 ## ⚠️ Important Notes
 
 - **Never commit `.env.local`** — it is already in `.gitignore` and contains your secret API key
-- The app uses **GPT-4o-mini** for cost efficiency; swap to `gpt-4o` in `route.ts` for higher quality
+- The app uses **Gemini 1.5 Flash** for blazing fast, cost-efficient story generation
 - Wikipedia API is used without authentication; it may occasionally rate-limit heavily
 
 ---
