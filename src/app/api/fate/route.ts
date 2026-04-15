@@ -105,7 +105,7 @@ After the story, on a new line output EXACTLY this JSON block (no markdown, no e
 The survivalProbability should be a realistic (usually very low) percentage chance they survive more than one year. Be creative and cruel with the cause of death string.`;
 
     const model = genAI.getGenerativeModel({
-      model: "gemini-1.5-flash",
+      model: "gemini-2.5-flash",
       systemInstruction: systemPrompt
     });
 
