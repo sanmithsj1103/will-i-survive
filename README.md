@@ -2,6 +2,8 @@
 
 > *A morbid historical fate calculator. Enter a year from history and your modern profession — discover, in gloriously grim detail, exactly how swiftly you would have perished.*
 
+**🔴 [Play the Live Demo here!](https://will-i-survive.netlify.app/)**
+
 ![Next.js](https://img.shields.io/badge/Next.js-16-black?style=flat-square&logo=next.js)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?style=flat-square&logo=typescript)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind-4-38bdf8?style=flat-square&logo=tailwindcss)
